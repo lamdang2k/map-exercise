@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="crossorigin="">
+   </script>
+    
+  </head>
+
+  <body>
+    <p>Click on the "Choose File" button to upload a file:</p>    
+    
+  <form >    
+    <input type="file" id="myFile" name="filename">    
+    <input type="submit">    
+  </form>    
+    <div id="map" style = "width: 1000px;height : 1000px; position: relative;"></div>
+    <script type="text/javascript" src="./data/myData.json"></script>
+
+    <script>
+    var map = L.map("map").setView([45.1695797, 5.4502821], 13);
+	var myData = JSON.parse(JSON.stringify(myData));
+	
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',maxZoom: 18,id: 'mapbox/streets-v11',tileSize: 512,zoomOffset: -1,accessToken: 'pk.eyJ1IjoidGRhbmciLCJhIjoiY2wxZXd6aXJ1MGE3dTNrdWdvb2ZnbHd2cyJ9.Q3XhgugxdmDmrtFuVUd2AA'}).addTo(map);
+	console.log(myData);
+	L.geoJSON(myData).addTo(map);
+    </script>
+
+  </body>
+
+</html>
